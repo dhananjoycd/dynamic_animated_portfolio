@@ -1,0 +1,37 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+.tech-background {
+  /* গ্রিড প্যাটার্ন তৈরি করা */
+  background-image: linear-gradient(to right, #ffffff0a 1px, transparent 1px),
+    linear-gradient(to bottom, #ffffff0a 1px, transparent 1px);
+  background-size: 50px 50px; /* গ্রিডের ঘনত্ব নিয়ন্ত্রণ করে */
+  background-attachment: fixed; /* স্ক্রল করলেও গ্রিড স্থির থাকবে */
+  background-position: center;
+}
+
+/* অ্যাকসেন্ট কালারকে একটু হালকা গ্লো দেওয়ার জন্য */
+.neon-text-glow {
+  text-shadow: 0 0 5px var(--color-primary), 0 0 10px var(--color-primary);
+}
+
+@keyframes blink-caret {
+  from,
+  to {
+    border-color: transparent;
+  }
+  50% {
+    border-color: var(--color-primary, #00f5d4);
+  } /* আপনার primary কালার কোড */
+}
+
+.text-shadow-neon-secondary {
+  text-shadow: 0 0 7px rgba(123, 47, 247, 0.6), 0 0 15px rgba(123, 47, 247, 0.4),
+    0 0 25px rgba(123, 47, 247, 0.3);
+  color: #c9b3ff;
+}
+
+.shadow-neon-glow {
+  box-shadow: 0 0 10px rgba(123, 47, 247, 0.5), 0 0 20px rgba(123, 47, 247, 0.3),
+    0 0 40px rgba(123, 47, 247, 0.1);
+}
