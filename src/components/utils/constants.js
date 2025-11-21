@@ -47,7 +47,7 @@ export const PROJECTS_DATA = [
     description:
       "A full-stack e-commerce platform featuring secure payments, user authentication, and admin product management.",
     tags: ["MERN Stack", "Stripe", "Redux", "Tailwind"],
-    imageUrl: "../../../public/assets/6238206.jpg", // আপনার ছবি পাথ
+    imageUrl: "/assets/6238206.jpg", // আপনার ছবি পাথ
     liveUrl: "https://live-ecommerce-demo.com",
     githubUrl: "https://github.com/dhananjoy/ecommerce-mern",
   },
@@ -56,7 +56,7 @@ export const PROJECTS_DATA = [
     description:
       "A research project visualizing long-term climate data using D3.js, React, and a Python backend for data processing.",
     tags: ["React", "D3.js", "Python", "Data Viz"],
-    imageUrl: "../../../public/assets/Business-Facebook-Cover-Banner-03.jpg",
+    imageUrl: "/assets/Business-Facebook-Cover-Banner-03.jpg",
     liveUrl: "https://live-climate-tool.com",
     githubUrl: "https://github.com/dhananjoy/climate-viz-tool",
   },
@@ -65,7 +65,7 @@ export const PROJECTS_DATA = [
     description:
       "The first version of my portfolio, showcasing a clean, minimalist design with smooth scroll animations.",
     tags: ["React", "Gatsby", "Styled Components"],
-    imageUrl: "../../../public/assets/1201.jpg",
+    imageUrl: "/assets/1201.jpg",
     liveUrl: "https://old-portfolio-v1.com",
     githubUrl: "https://github.com/dhananjoy/portfolio-v1",
   },

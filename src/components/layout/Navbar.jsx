@@ -1,112 +1,125 @@
-import React, { useState } from "react";
-import { Menu, X, Rocket } from "lucide-react"; // Lucide Icons থেকে প্রয়োজনীয় আইকন
 /* eslint-disable no-unused-vars */
+import { useState } from "react";
 import { motion } from "framer-motion";
-// নেভিগেশন লিংক ডেটা (আপনার প্রয়োজন অনুযায়ী পরিবর্তন করুন)
+import { Menu, X } from "lucide-react";
+
+// আপনার নেভিগেশন লিংক ডেটা (প্রয়োজন অনুসারে পরিবর্তন করুন)
 const navLinks = [
+  { name: "Home", href: "#top" },
   { name: "About", href: "#about" },
   { name: "Skills", href: "#skills" },
   { name: "Projects", href: "#projects" },
-  { name: "Research", href: "#research" },
+  { name: "Experience", href: "#experience" },
   { name: "Contact", href: "#contact" },
 ];
 
-const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false); // মোবাইল মেনুর স্টেট
+// Framer Motion Variants
+const navVariants = {
+  hidden: { opacity: 0, y: -50 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 100, delay: 0.1 },
+  },
+};
 
-  // Framer Motion Variants for Mobile Menu
-  const menuVariants = {
-    hidden: { x: "100%" },
-    visible: {
-      x: 0,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 20,
-      },
-    },
+const mobileMenuVariants = {
+  open: { opacity: 1, x: 0, transition: { type: "tween", duration: 0.3 } },
+  closed: {
+    opacity: 0,
+    x: "100%",
+    transition: { type: "tween", duration: 0.3 },
+  },
+};
+
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  // মেনু টগল ফাংশন
+  const toggleMenu = () => setIsOpen(!isOpen);
+
+  // মেনু আইটেম ক্লিক হ্যান্ডলার (মোবাইলে মেনু বন্ধ করার জন্য)
+  const handleLinkClick = () => {
+    setIsOpen(false);
   };
 
   return (
+    // ফিক্সড পজিশন, টপে থাকবে এবং স্ক্রল করলে আংশিক স্বচ্ছ দেখাবে
     <motion.nav
-      // Navbar এনিমেশন: শুরুতে উপর থেকে ফেড-ইন
-      initial={{ y: -50, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      className="sticky top-0 z-50 w-full backdrop-blur-md bg-background-dark/80"
+      className="fixed top-0 left-0 right-0 z-50 bg-background-dark/95 backdrop-blur-md shadow-lg shadow-primary/10"
+      variants={navVariants}
+      initial="hidden"
+      animate="visible"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="flex h-16 items-center justify-between">
-          {/* লোগো/নাম */}
-          <div className="flex items-center">
-            <a href="#" className="flex items-center space-x-2">
-              <Rocket className="text-primary w-6 h-6" />
-              <span className="font-display text-xl font-bold text-white">
-                Dhananjoy
-              </span>
-            </a>
+        <div className="flex justify-between items-center h-16">
+          {/* লোগো/নেম */}
+          <a
+            href="#top"
+            className="flex items-center text-2xl font-display font-bold text-white hover:text-primary transition duration-300"
+          >
+            D.J.
+          </a>
+
+          {/* ডেস্কটপ মেনু (Hidden on small screens) */}
+          <div className="hidden lg:flex lg:space-x-8">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-white/80 font-medium hover:text-primary relative transition duration-300 group"
+              >
+                {link.name}
+                {/* Underline Hover Effect */}
+                <span className="absolute left-0 bottom-0 h-[2px] w-0 bg-primary transition-all duration-300 group-hover:w-full"></span>
+              </a>
+            ))}
           </div>
 
-          {/* ডেস্কটপ নেভিগেশন লিংক */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {navLinks.map((link) => (
-                <motion.a
-                  key={link.name}
-                  href={link.href}
-                  className="px-3 py-2 text-sm font-medium text-white/70 transition-colors hover:text-primary"
-                  whileHover={{ scale: 1.05 }} // হোভার এনিমেশন
-                >
-                  {link.name}
-                </motion.a>
-              ))}
-            </div>
-          </div>
-
-          {/* মোবাইল মেনু টগল বাটন */}
-          <div className="flex md:hidden">
+          {/* মোবাইল মেনু টগল বাটন (Hamburger Icon) */}
+          <div className="lg:hidden">
             <button
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center rounded-md p-2 text-primary hover:text-white focus:outline-none focus:ring-2 focus:ring-primary"
+              onClick={toggleMenu}
+              className="inline-flex items-center justify-center p-2 rounded-md text-white/80 hover:text-primary focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary transition duration-300"
+              aria-expanded={isOpen}
+              aria-label="Toggle navigation"
             >
               {isOpen ? (
-                <X className="block h-6 w-6" aria-hidden="true" />
+                <X className="w-6 h-6" />
               ) : (
-                <Menu className="block h-6 w-6" aria-hidden="true" />
+                <Menu className="w-6 h-6" />
               )}
             </button>
           </div>
         </div>
       </div>
 
-      {/* মোবাইল মেনু ড্রয়ার (Framer Motion দিয়ে এনিমেটেড) */}
+      {/* =================================== 
+          মোবাইল মেনু কন্টেইনার (Animated)
+          =================================== */}
       <motion.div
-        initial="hidden"
-        animate={isOpen ? "visible" : "hidden"}
-        variants={menuVariants}
-        className="md:hidden absolute top-16 left-0 w-full bg-background-dark/95 backdrop-blur-lg border-t border-primary/20 shadow-xl"
+        className="lg:hidden absolute top-16 left-0 w-full bg-background-dark/95 backdrop-blur-sm shadow-xl"
+        initial="closed"
+        animate={isOpen ? "open" : "closed"}
+        variants={mobileMenuVariants}
+        // অ্যানিমেশনের সময় স্ক্রল করা বন্ধ করার জন্য
+        style={{ overflow: "hidden" }}
       >
-        <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
           {navLinks.map((link) => (
-            <a
+            <motion.a
               key={link.name}
               href={link.href}
-              onClick={() => setIsOpen(false)} // ক্লিক করলে মেনু বন্ধ হবে
-              className="block rounded-md px-3 py-2 text-base font-medium text-white/80 transition-colors hover:bg-primary/10 hover:text-primary"
+              onClick={handleLinkClick}
+              className="block px-3 py-2 rounded-md text-base font-medium text-white/90 hover:bg-primary/20 hover:text-primary transition duration-300 border-l-4 border-transparent hover:border-primary"
+              // মোবাইল মেনুর ভেতরের আইটেম অ্যানিমেশন
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 * navLinks.indexOf(link) }}
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
-          <div className="pt-2 border-t border-white/10">
-            <a
-              href="#contact"
-              onClick={() => setIsOpen(false)}
-              className="block rounded-md px-3 py-2 text-base font-bold text-primary transition-colors hover:bg-primary/10"
-            >
-              Contact Me
-            </a>
-          </div>
         </div>
       </motion.div>
     </motion.nav>
