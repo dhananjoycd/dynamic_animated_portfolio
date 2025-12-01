@@ -58,7 +58,7 @@ const Navbar = () => {
             href="#top"
             className="flex items-center text-2xl font-display font-bold text-white hover:text-primary transition duration-300"
           >
-            D.J.
+            Dhananjoy Bio's
           </a>
 
           {/* ডেস্কটপ মেনু (Hidden on small screens) */}
@@ -105,19 +105,22 @@ const Navbar = () => {
         // অ্যানিমেশনের সময় স্ক্রল করা বন্ধ করার জন্য
         style={{ overflow: "hidden" }}
       >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-gray-800/65">
           {navLinks.map((link) => (
             <motion.a
               key={link.name}
               href={link.href}
               onClick={handleLinkClick}
-              className="block px-3 py-2 rounded-md text-base font-medium text-white/90 hover:bg-primary/20 hover:text-primary transition duration-300 border-l-4 border-transparent hover:border-primary"
+              className="block px-3 py-2 rounded-md text-base font-medium text-white/90 hover:bg-primary/20 hover:text-yellow-300 transition duration-300 border-l-4 border-transparent hover:border-primary"
               // মোবাইল মেনুর ভেতরের আইটেম অ্যানিমেশন
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.1 * navLinks.indexOf(link) }}
             >
-              {link.name}
+              <p className="border-b border-dotted pb-2 text-center">
+                {" "}
+                {link.name}
+              </p>
             </motion.a>
           ))}
         </div>
