@@ -11,10 +11,12 @@ import Skills from "./components/sections/Skills";
 
 function App() {
   return (
-    <div className="min-h-screen tech-background   text-white font-body relative">
+    <div className="min-h-screen bg-background-dark text-white font-body relative overflow-x-hidden">
+      {/* Fixed Navbar */}
       <Navbar />
 
-      <main>
+      {/* Add global responsive padding */}
+      <main className="pt-20 px-4 sm:px-6 lg:px-8 space-y-20">
         <Hero />
         <About />
         <Skills />
