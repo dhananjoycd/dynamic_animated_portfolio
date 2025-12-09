@@ -1,4 +1,5 @@
 import "./App.css";
+import UniversityCGPACalculator from "./components/CGPA/cgpa";
 import Footer from "./components/layout/Footer";
 import Navbar from "./components/layout/Navbar";
 import About from "./components/sections/About";
@@ -23,6 +24,8 @@ function App() {
         <Projects />
         <Research />
         <ExperienceEducation />
+
+        <UniversityCGPACalculator />
         <Contact />
       </main>
 
